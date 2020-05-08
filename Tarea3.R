@@ -3,6 +3,8 @@
 #Librerias
 #install.packages("TeachingDemos")
 #library(TeachingDemos)
+#install.packages("epitools")
+#library(epitools)
 
 
 ###################################################################
@@ -57,3 +59,32 @@ if(sd_0 >= sigma.liminf && sd_0 <= sigma.limsup){
 # mostró que 25 de 37 lágrimas ubicadas entre 3 y 6 mm del borde del menisco fueron curados.
 rm(list = ls())
 
+# (a) Calcule un IC de la proporción de tales lágrimas que sanarán.
+ic = binom.exact(25, 37, 0.95)
+print(paste("(a). [", round(ic$lower,3), " <= p <= ", round(ic$upper, 3), "] = 0.95"))
+
+# (b) Calcule un límite de confianza tradicional unilateral del 95%
+# en la proporción de tales lágrimas que sanarán
+
+###################################################################
+########################### EJERCICIO 12###########################
+###################################################################
+
+# Se pregunta a una muestra aleatoria de 500 votantes registrados en 
+# Phoenix si están a favor del uso de combustibles oxigenados durante 
+# todo el año para reducir la contaminación del aire. Si más de 315 
+# votantes responden positivamente, concluiremos que al menos el 60% 
+# de los votantes favorecen el uso de estos combustibles.
+rm(list = ls())
+
+n = 500
+p_0 = 0.6
+alpha = 0.05
+
+# (a) Encuentre la probabilidad de error de tipo I si exactamente el 60% de los votantes está a favor del uso de estos combustibles.
+resultado_test = prop.test(300, 500, 0.6, alternative = "less", conf.level = 0.95)
+print(paste("P(Error Tipo I) = ", round(resultado_test$p.value, 3)))
+
+# (b) ¿Cuál es la probabilidad de error tipo II si el 75% de los votantes está a favor de esta acción?
+resultado_test = prop.test(375, n, p_0, alternative = "less", conf.level = 1 - alpha)
+print(paste("P(Error Tipo II) = ", 1 - round(resultado_test$p.value, 3)))
