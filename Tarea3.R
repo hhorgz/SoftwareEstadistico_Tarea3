@@ -119,4 +119,89 @@ rm(list = ls())
 
 muestra= c(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1)
 prefieren_producto = muestra[muestra == 1]
-prop.test(length(prefieren_producto), length(muestra), 0.53, alternative = "greater", conf.level = 0.96)
+p_0 = 0.53
+alpha = 0.04
+resultado_test = prop.test(length(prefieren_producto), length(muestra), p_0, alternative = "greater", conf.level = 1 - alpha)
+if(resultado_test$estimate > p_0){
+  print(paste("La inversion fue la correcta. ", round(resultado_test$estimate, 3), " > ", p_0))
+} else {
+  print(paste("La inversion no fue la correcta. ", round(resultado_test$estimate, 3), " <= ", p_0))
+}
+
+###################################################################
+########################### EJERCICIO 15###########################
+###################################################################
+
+# Un fabricante de lentes interoculares está calificando una nueva 
+# rectificadora. Ella calificará la máquina si el porcentaje de lentes 
+# pulidas que contienen defectos en la superficie no supera el 4%. Una 
+# muestra aleatoria de 300 lentes contiene 11 lentes defectuosas.
+rm(list = ls())
+p_0 = 0.04
+n = 300
+x = 11
+p = x/n
+
+# (a) Formule y pruebe un conjunto apropiado de hipótesis para determinar 
+# si la máquina puede ser calificada. Use una prueba de nivel fijo con α=0.05.
+
+#Ho: p >= 0.04
+#Ha: p < 0.04
+alpha = 0.05
+prop.test(x, n, p_0, alternative = "less", conf.level = 1 - alpha)
+
+# (b) Encuentre el valor P para esta prueba.
+resultado_test = prop.test(x, n, p_0, alternative = "less", conf.level = 1 - alpha)
+print(paste("(b). p-valor = ", round(resultado_test$p.value, 3)))
+
+# (c) Suponga que el porcentaje de lentes defectuosos es en realidad del 2%. ¿Cuál es el error β para esta prueba?
+x = 300 * 0.02
+resultado_test = prop.test(x, n, p_0, alternative = "less", conf.level = 1 - alpha)
+print(paste("(c). P(Error Tipo II) = ", 1 - round(resultado_test$p.value, 3)))
+
+# (d) Suponga que un error β de 0.05 es aceptable si el porcentaje verdadero es del 2%. Con α= 0.05, ¿cuál es el tamaño de muestra equivalente?
+
+###################################################################
+########################### EJERCICIO 16###########################
+###################################################################
+
+# El contenido de azúcar del jarabe en duraznos enlatados es normalmente 
+# distribuido, y se cree que la varianza es σ2=18 (mg)2
+rm(list = ls())
+sigmasqr_0 = 18
+
+# (a) Pruebe la hipótesis de que la varianza no es 18 (mg)2 si una muestra 
+# aleatoria de n=10 latas producen una desviación estándar muestral 
+# de 4 mg, utilizando una prueba de nivel fijo con 0.05. Indique cualquier 
+# suposición necesaria sobre la distribución subyacente de los datos.
+
+# (b) ¿Cuál es el valor P para esta prueba?
+n = 10
+sd = 4
+alpha = 0.05
+
+chi2_0 = (n - 1) * (sd ^ 2) / sigmasqr_0
+# Se obtiene el p-valor
+p_valor = 2 * pchisq(chi2_0, df = n - 1)
+if(p_valor > 2 * pchisq(chi2_0, df = n - 1, lower.tail = FALSE)) {
+  p_valor = 2 * pchisq(chi2_0, df = n - 1, lower.tail = FALSE)
+}
+print(paste("(b). El p-valor es: ", round(p_valor, 3)))
+if(p_valor > alpha){
+  print("(a). Se acepta Ho: sigmasqr = 18(mg)2")
+} else {
+  print("(a). Se rechaza Ho y se acepta H1: sigmasqr ≠ 18 (mg)2")
+}
+
+# (c) Encuentre un IC al 98%.
+alpha = 0.02
+sigmasqr.liminf = (n-1)*(sd ^ 2)/qchisq(1-alpha/2, df = n - 1)
+sigmasqr.limsup = (n-1)*(sd ^ 2)/qchisq(alpha/2, df = n - 1)
+print(paste("(c). [", round(sigma.liminf, 3), " <= sigmasqr <= ", round(sigma.limsup, 3),  "] = ", 1 - alpha))
+
+# (d) Use el IC en la parte (c) para probar la hipótesis
+if(sigmasqr_0 >= sigmasqr.liminf && sigmasqr_0 <= sigmasqr.limsup){
+  print(paste("(d). ",sigmasqr_0, " esta dentro del intervalo de confianza [", sigmasqr.liminf, ", ", sigmasqr.limsup, "]"))
+} else {
+  print(paste("(d). ",sigmasqr_0, " esta fuera del intervalo de confianza [", sigmasqr.liminf, ", ", sigmasqr.limsup, "]"))
+}
